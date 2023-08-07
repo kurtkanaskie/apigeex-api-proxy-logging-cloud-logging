@@ -6,12 +6,12 @@ Captures logging information at each of the Flow Hook locations and builds a "lo
 
 ## Overview
 ### Shared Flows
-* log-set-values-v1 (Shared Flow in each of the Flow Hook Shared Flows)
-* log-cloud-logging-sc-v1 (Flow Callout in API Proxy Post Client Flow)
-* pre-proxy-v1 (Flow Callout to log-set-values-v1)
-* pre-target-v1 (Flow Callout to log-set-values-v1)
-* post-target-v1 (Flow Callout to log-set-values-v1)
-* post-proxy-v1 (Flow Callout to log-set-values-v1)
+* **log-set-values-v1** (Shared Flow in each of the Flow Hook Shared Flows)
+* **log-cloud-logging-sc-v1** (Flow Callout in API Proxy Post Client Flow)
+* **pre-proxy-v1** (Flow Callout to log-set-values-v1)
+* **pre-target-v1** (Flow Callout to log-set-values-v1)
+* **post-target-v1** (Flow Callout to log-set-values-v1)
+* **post-proxy-v1** (Flow Callout to log-set-values-v1)
 
 Each of the Flow Callouts in the Flow Hook Shared Flows passes a parameter which is used to detect the flow location.
 ```
