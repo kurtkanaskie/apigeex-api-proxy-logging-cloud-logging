@@ -1,0 +1,13 @@
+<SharedFlowBundle revision="12" name="log-cloud-logging-sc-v1">
+    <DisplayName></DisplayName>
+    <Description>Log to Cloud Logging in same GCP Project using apiproxy-logging SA. Expects variables set by log-set-values-v1 SF.</Description>
+    <CreatedAt>1665069990638</CreatedAt>
+    <LastModifiedAt>1665069990638</LastModifiedAt>
+    <Policies>
+        <Policy>SC-log-cloud-logging</Policy>
+    </Policies>
+    <SharedFlows>
+        <SharedFlow>default</SharedFlow>
+    </SharedFlows>
+    <subType>SharedFlow</subType>
+</SharedFlowBundle>

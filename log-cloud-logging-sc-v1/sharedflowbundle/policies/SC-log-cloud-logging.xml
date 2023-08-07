@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ServiceCallout name="SC-log-cloud-logging">
+  <Request>
+    <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+    <Set>
+      <Verb>POST</Verb>
+      <Payload contentType="application/json">
+            {
+                "logName": "projects/{organization.name}/logs/apigee-proxy-logging-sc",
+                "resource": {
+                    "type": "global",
+                    "labels": {
+                        "project_id": "{organization.name}"
+                    }
+                },
+                "labels": {
+                    "label_environment_name": "{environment.name}",
+                    "label_apiproxy_name": "{apiproxy.name}",
+                    "label_apiproxy_revision": "{apiproxy.revision}"
+                },
+                "entries": [
+                    {
+                        "severity": "{logging_level}",
+                        "jsonPayload": {logging_message}
+                    }
+                ],
+                "partialSuccess": true
+            }
+            </Payload>
+    </Set>
+  </Request>
+  <Response>logResponse</Response>
+  <HTTPTargetConnection>
+    <!-- apiproxy-logging@apigeex-mint-kurt.iam.gserviceaccount.com -->
+    <URL>https://logging.googleapis.com/v2/entries:write</URL>
+    <Authentication>
+      <GoogleAccessToken>
+        <Scopes>
+          <Scope>https://www.googleapis.com/auth/logging.write</Scope>
+        </Scopes>
+      </GoogleAccessToken>
+    </Authentication>
+  </HTTPTargetConnection>
+</ServiceCallout>

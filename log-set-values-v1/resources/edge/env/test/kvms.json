@@ -1,0 +1,44 @@
+[
+    {
+        "name": "log-set-values-v1",
+        "encrypted": true,
+        "entry": [
+            {
+                "name": "logging_log",
+                "value": "true"
+            },
+            {
+                "name": "logging_level",
+                "value": "DEBUG"
+            },
+            {
+                "name": "logging_mask_character",
+                "value": "X"
+            },
+            {
+                "name": "logging_host",
+                "value": "xapi-dev.kurtkanaskie.net"
+            },
+            {
+                "name": "logging_path",
+                "value": "logging-mock"
+            },
+            {
+                "name": "logging_mask_fields",
+                "value": "ssn,ccn"
+            },
+            {
+                "name": "apigee-api-facade-v1",
+                "value": "false,DEBUG,x"
+            },
+            {
+                "name": "pingstatus-v1",
+                "value": "true,DEBUG,x"
+            },
+            {
+                "name": "pingstatus-v1__mask_fields",
+                "value": "developer_phone,client_id"
+            }
+        ]
+    }
+]

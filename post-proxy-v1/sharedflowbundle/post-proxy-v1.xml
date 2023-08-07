@@ -1,0 +1,13 @@
+<SharedFlowBundle revision="11" name="post-proxy-v1">
+    <DisplayName></DisplayName>
+    <Description></Description>
+    <CreatedAt>1691430860171</CreatedAt>
+    <LastModifiedAt>1691430860171</LastModifiedAt>
+    <Policies>
+        <Policy>FC-log-set-values-v1</Policy>
+    </Policies>
+    <SharedFlows>
+        <SharedFlow>default</SharedFlow>
+    </SharedFlows>
+    <subType>SharedFlow</subType>
+</SharedFlowBundle>

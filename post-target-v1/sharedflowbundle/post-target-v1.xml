@@ -1,0 +1,13 @@
+<SharedFlowBundle revision="1" name="post-target-v1">
+    <DisplayName></DisplayName>
+    <Description></Description>
+    <CreatedAt>1642526661409</CreatedAt>
+    <LastModifiedAt>1642526683677</LastModifiedAt>
+    <Policies>
+        <Policy>FC-log-set-values-v1</Policy>
+    </Policies>
+    <SharedFlows>
+        <SharedFlow>default</SharedFlow>
+    </SharedFlows>
+    <subType>SharedFlow</subType>
+</SharedFlowBundle>

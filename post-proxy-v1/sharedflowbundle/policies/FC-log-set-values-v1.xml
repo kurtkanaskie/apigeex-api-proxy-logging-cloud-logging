@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<FlowCallout continueOnError="false" enabled="true" name="FC-log-set-values-v1">
+  <Parameters>
+    <!-- Need to set currentstep.flowstate, its empty otherwise -->
+    <Parameter name="currentstep.flowstate">{currentstep.flowstate}</Parameter>
+  </Parameters>
+  <SharedFlowBundle>log-set-values-v1</SharedFlowBundle>
+</FlowCallout>

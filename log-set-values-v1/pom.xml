@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>apigee</groupId>
+	<artifactId>log-set-values-v1</artifactId>
+	<version>-</version>
+	<name>log-set-values-v1</name>
+	<packaging>pom</packaging>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>central</id>
+			<name>Maven Plugin Repository</name>
+			<url>https://repo.maven.apache.org/maven2</url>
+			<layout>default</layout>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<org.slf4j.simpleLogger.defaultLogLevel>info</org.slf4j.simpleLogger.defaultLogLevel>
+		<project.root.dir>${basedir}</project.root.dir>
+		<target.root.dir>${basedir}/target</target.root.dir>
+		<commit>none</commit>
+		<branch>local</branch>
+	</properties>
+
+	<!-- This is where you add environment specific properties under various profile names 
+		 For apigee.options, refer to "Advanced Configuration Options" under https://github.com/apigee/apigee-deploy-maven-plugin#pom-xml-sample 
+	-->
+	<profiles>
+		<profile>
+			<id>test</id>
+			<!-- Uses properties from $HOME/.m2/settings.xml or environment variables via set-edge-env-values used in Jenkins -->
+			<!-- Jenkins command:
+				install -P${EdgeProfile} -Dapigee.org=${EdgeOrg} -Dapigee.env=${EdgeEnv} 
+				-Dapi.northbound.domain=${EdgeNorthboundDomain} -Dapigee.username=${EdgeInstallUsername} -Dapigee.password=${EdgeInstallPassword} 
+				-Dapigee.config.options=update -Dapigee.config.dir=target/resources/edge -Dapigee.config.exportDir=target/test/integration 
+				-Dcommit=${GIT_COMMIT} -Dbranch=${GIT_BRANCH}
+			-->
+			<properties>
+				<apigee.profile>test</apigee.profile>
+				<apigee.hosturl>https://apigee.googleapis.com</apigee.hosturl>
+				<apigee.apiversion>v1</apigee.apiversion>
+				<apigee.apitype>sharedflow</apigee.apitype>
+				<apigee.options>override</apigee.options>
+				<apigee.config.dir>target/resources/edge</apigee.config.dir>
+				<apigee.config.exportDir>target/test/integration</apigee.config.exportDir>
+				<apigee.config.options>update</apigee.config.options>
+				<apigee.app.ignoreAPIProducts>true</apigee.app.ignoreAPIProducts>
+				<!-- -->
+				<!-- Override on command line or replace with your values -->
+				<apigee.org>apigeex-mint-kurt</apigee.org>
+				<apigee.env>test</apigee.env>
+				<apigee.username>cicd-test-service-account@apigeex-mint-kurt.iam.gserviceaccount.com</apigee.username>
+				<apigee.serviceaccount.file>/Users/kurtkanaskie/work/APIGEEX/SAs/apigeex-mint-kurt-cicd-test-service-account.json</apigee.serviceaccount.file>
+				<api.northbound.domain>xapi-test.kurtkanaskie.net</api.northbound.domain>
+				<api.testtag>@cors,@health,@errorHandling,@wip</api.testtag>
+			</properties>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<!-- Uses properties from $HOME/.m2/settings.xml or environment variables via set-edge-env-values used in Jenkins -->
+			<!-- Jenkins command:
+				install -P${EdgeProfile} -Dapigee.org=${EdgeOrg} -Dapigee.env=${EdgeEnv} 
+				-Dapi.northbound.domain=${EdgeNorthboundDomain} -Dapigee.username=${EdgeInstallUsername} -Dapigee.password=${EdgeInstallPassword} 
+				-Dapigee.config.options=update -Dapigee.config.dir=target/resources/edge -Dapigee.config.exportDir=target/test/integration 
+				-Dcommit=${GIT_COMMIT} -Dbranch=${GIT_BRANCH}
+			-->
+			<properties>
+				<apigee.profile>prod</apigee.profile>
+				<apigee.env>${EdgeEnv}</apigee.env>
+				<apigee.hosturl>https://api.enterprise.apigee.com</apigee.hosturl>
+				<apigee.apiversion>v1</apigee.apiversion>
+				<apigee.apitype>sharedflow</apigee.apitype>
+				<apigee.options>override</apigee.options>
+				<apigee.config.dir>target/resources/edge</apigee.config.dir>
+				<apigee.org>${EdgeOrg}</apigee.org>
+				<apigee.username>cicd-prod-service-account@apigeex-mint-kurt.iam.gserviceaccount.com</apigee.username>
+				<apigee.serviceaccount.file>/Users/kurtkanaskie/work/APIGEEX/SAs/apigeex-mint-kurt-cicd-prod-service-account.json</apigee.serviceaccount.file>
+				<api.northbound.domain>xapi.kurtkanaskie.net</api.northbound.domain>
+				<api.testtag>@errorHandling,@health,@cors,@wip</api.testtag>
+				<apigee.options>validate</apigee.options>
+			</properties>
+		</profile>		
+	</profiles>
+
+	<build>
+		<plugins>
+			<!-- run jshint -->
+			<!-- TODO
+			<plugin>
+				<groupId>com.cj.jshintmojo</groupId>
+				<artifactId>jshint-maven-plugin</artifactId>
+				<version>1.6.0</version>
+				<executions>
+					<execution>
+						<id>jshint</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>lint</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<options>curly,eqeqeq,forin,latedef,undef,noempty,nonew,unused</options>
+					<directories>
+						<directory>sharedflowbundle/resources/jsc</directory>
+					</directories>
+					<reporter>jslint</reporter>
+				</configuration>
+			</plugin>
+			-->
+
+			<!-- copy the full apiproxy folder to target folder -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.1.0</version>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<overwrite>true</overwrite>
+							<resources>
+								<resource>
+									<!--source -->
+									<directory>${project.root.dir}</directory>
+									<filtering>true</filtering>
+									<includes>
+										<include>resources/**</include>
+										<include>sharedflowbundle/**</include>
+									</includes>
+								</resource>
+							</resources>
+							<!--target -->
+							<outputDirectory>${target.root.dir}</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Do replacements -->
+			<plugin>
+				<groupId>com.google.code.maven-replacer-plugin</groupId>
+				<artifactId>replacer</artifactId>
+				<version>1.5.2</version>
+				<executions>
+					<execution>
+						<id>replace</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>replace</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<basedir>${target.root.dir}</basedir>
+					<includes>
+						<include>sharedflowbundle/log-set-values-v1.xml</include>
+					</includes>
+					<replacements>
+						<replacement>
+							<token>DESCRIPTION</token>
+							<value>commit ${commit} from ${branch} branch by ${apigee.username}</value>
+						</replacement>
+					</replacements>
+				</configuration>
+			</plugin>
+
+			<!-- apigee Deploy prefix: apigee-enterprise -->
+			<plugin>
+				<groupId>io.apigee.build-tools.enterprise4g</groupId>
+				<artifactId>apigee-edge-maven-plugin</artifactId>
+				<version>2.3.0</version>
+				<executions>
+					<execution>
+						<id>configure-bundle-step</id>
+						<phase>package</phase>
+						<goals>
+							<goal>configure</goal>
+						</goals>
+					</execution>
+					<!--deploy bundle -->
+					<execution>
+						<id>deploy-bundle-step</id>
+						<phase>install</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- apigee Configuration -->
+			<plugin>
+				<groupId>com.apigee.edge.config</groupId>
+				<artifactId>apigee-config-maven-plugin</artifactId>
+				<version>2.3.0</version>
+				<!-- as Initial entries for now
+				<executions>
+                    <execution>
+                        <id>create-config-kvm</id>
+                        <phase>verify</phase>                        
+                        <goals>
+                            <goal>keyvaluemaps</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            	-->
+            </plugin>   
+
+            <!-- install node, npm install, run apigeelint, run unit, run integration -->
+			<plugin>
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
+				<version>1.8.0</version>
+				<!-- NOTE: put executable in targetnode, otherwise uses node and deploy plugin thinks its a node.js proxy -->
+				<configuration>
+					<installDirectory>targetnode</installDirectory>
+				</configuration>
+				<executions>
+					<execution>
+						<id>install node and npm</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>install-node-and-npm</goal>
+						</goals>
+						<configuration>
+							<nodeVersion>v12.16.2</nodeVersion>
+						</configuration>
+					</execution>
+					<execution>
+						<id>npm install</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<configuration>
+							<arguments>install</arguments>
+						</configuration>
+					</execution>
+					<execution>
+						<id>apigeelint</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<configuration>
+							<arguments>run apigeelint</arguments>
+						</configuration>
+					</execution>
+					<!--
+					<execution>
+						<id>unit</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<configuration>
+							<arguments>run unit</arguments>
+						</configuration>
+					</execution>
+					<execution>
+						<id>integration</id>
+						<phase>install</phase>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<configuration>
+							<skip>${skip.integration}</skip>
+							<arguments>run integration - - - -tags ${api.testtag}</arguments>
+						</configuration>
+					</execution>
+					-->
+				</executions>
+			</plugin>
+
+			<!-- cleaning dirs -->
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.5</version>
+
+				<executions>
+					<execution>
+						<id>auto-clean-init</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>clean</goal>
+						</goals>
+					</execution>
+					<!-- leave the target dir for debugging, post mortem -->
+					<execution>
+						<id>auto-clean-install</id>
+						<phase>install</phase>
+						<goals>
+							<goal>clean</goal>
+						</goals>
+					</execution>
+					<!-- -->
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

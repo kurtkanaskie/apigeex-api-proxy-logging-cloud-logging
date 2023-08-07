@@ -1,0 +1,4 @@
+.DS_Store
+targetnode
+node_modules
+*.zip

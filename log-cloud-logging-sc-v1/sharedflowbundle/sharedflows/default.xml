@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<SharedFlow name="default">
+  <Step>
+    <Condition>logging_log == 'true'</Condition>
+    <Name>SC-log-cloud-logging</Name>
+  </Step>
+</SharedFlow>
