@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage continueOnError="false" enabled="true" name="AM-set-echo-target-request">
+    <AssignVariable>
+        <Name>target_host</Name>
+        <Value>mocktarget.apigee.net</Value>
+    </AssignVariable>
+    <AssignVariable>
+        <Name>target_path</Name>
+        <Value>echo</Value>
+    </AssignVariable>
+    <Set>
+        <Verb>GET</Verb>
+        <Payload/>
+    </Set>
+</AssignMessage>

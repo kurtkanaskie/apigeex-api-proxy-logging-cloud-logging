@@ -1,15 +1,15 @@
 # log-set-values-v1
-Apigee X Shared Flow to capture logging information at each of the flow hook locations.
-Doesn't actually log message, intended to be use with a Shared Flow that logs to various destinations (e.g. logging-mock proxy, Cloud Logging (via Service Callout or Message Logging).
+Apigee X Shared Flow to capture logging information at each of the Flow Hook locations.
+It doesn't actually log the information, it builds a "logging_message" flow variable that is intended to be used with a Shared Flow that logs to various destinations using a Service Callout or Message Logging policy.
 
 Features:
 * Uses a single Shared Flow with a JavaScript policy to capture request and response information. 
 * Can be used as Shared Flow at each Flow Hook location, either in the proxy or via Flow Hooks.
 * Can be used discretely in a proxy in each flow hook location and in Target and Proxy DefaultFaultRules. 
 * Configurable via KVM for logging in general and loggingh levels
-** INFO
-** DEBUB
-** ERROR
+  * INFO - minimal information, proxy and target request URLs, response status and latencies
+  * DEBUG - full information including headers, request and response content
+  * ERROR - same as DEBUG but with logLevel set to ERROR
 * Supports field level masking for all proxies or for specific proxies via KVM values. 
 * Handles non-json responses from targets.
 

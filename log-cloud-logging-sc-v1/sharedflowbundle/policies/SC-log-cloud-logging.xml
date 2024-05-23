@@ -29,7 +29,8 @@
             </Payload>
     </Set>
   </Request>
-  <Response>logResponse</Response>
+  <!-- Commented out for fire-n-forget -->
+  <!-- <Response>logResponse</Response> -->
   <HTTPTargetConnection>
     <!-- apiproxy-logging@apigeex-mint-kurt.iam.gserviceaccount.com -->
     <URL>https://logging.googleapis.com/v2/entries:write</URL>

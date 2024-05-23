@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TargetEndpoint name="default">
+    <PreFlow name="PreFlow">
+        <Request/>
+        <Response/>
+    </PreFlow>
+    <Flows>
+        <Flow name="/status">
+            <Description/>
+            <Request>
+                <Step>
+                    <Name>AM-set-echo-target-request</Name>
+                </Step>
+            </Request>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "/status") and (request.verb = "GET")</Condition>
+        </Flow>
+        <Flow name="/status">
+            <Description/>
+            <Request>
+                <Step>
+                    <Name>AM-set-echo-target-request</Name>
+                </Step>
+            </Request>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "/status") and (request.verb = "POST")</Condition>
+        </Flow>
+        <Flow name="/status-xml">
+            <Description/>
+            <Request>
+                <Step>
+                    <Name>AM-set-xml-target-request</Name>
+                </Step>
+            </Request>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "/status-xml") and (request.verb = "GET")</Condition>
+        </Flow>
+    </Flows>
+    <PostFlow name="PostFlow">
+        <Request/>
+        <Response>
+            <Step>
+                <Name>AM-restore-request</Name>
+            </Step>
+        </Response>
+    </PostFlow>
+    <HTTPTargetConnection>
+        <Properties/>
+        <URL>https://{target_host}/{target_path}</URL>
+    </HTTPTargetConnection>
+</TargetEndpoint>

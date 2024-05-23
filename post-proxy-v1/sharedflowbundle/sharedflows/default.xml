@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <SharedFlow name="default">
     <Step>
-        <!-- Add condition if you want to skip logging OPTIONS requests/responses -->
+        <!-- Skip logging OPTIONS requests/responses -->
         <!--
         <Condition>(request.verb != "OPTIONS")</Condition>
         -->

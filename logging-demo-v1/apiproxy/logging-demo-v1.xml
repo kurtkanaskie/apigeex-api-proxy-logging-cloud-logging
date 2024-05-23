@@ -1,0 +1,29 @@
+<APIProxy revision="7" name="logging-demo-v1">
+    <DisplayName></DisplayName>
+    <Description>TODO: test 5 second delay, mock target is not working. No route /status/**Relies on FlowHooks using log-set-values-v1 - testing to see if PostClientFlow includes additional latency</Description>
+    <CreatedAt>1691503279427</CreatedAt>
+    <LastModifiedAt>1691503279427</LastModifiedAt>
+    <BasePaths>/logging-demo-v1</BasePaths>
+    <Policies>
+        <Policy>FC-log-cloud-logging-sc-v1</Policy>
+        <Policy>AM-response</Policy>
+        <Policy>JS-latency</Policy>
+        <Policy>RF-not-found</Policy>
+        <Policy>AM-restore-request</Policy>
+        <Policy>AM-save-request</Policy>
+        <Policy>RF-error-qp-or-x-error-header</Policy>
+        <Policy>RF-bad-qp</Policy>
+        <Policy>AM-copy-false</Policy>
+        <Policy>AM-set-xml-target-request</Policy>
+        <Policy>AM-set-echo-target-request</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources>
+        <Resource>jsc://JS-latency.js</Resource>
+    </Resources>
+    <TargetEndpoints>
+        <TargetEndpoint>default</TargetEndpoint>
+    </TargetEndpoints>
+</APIProxy>

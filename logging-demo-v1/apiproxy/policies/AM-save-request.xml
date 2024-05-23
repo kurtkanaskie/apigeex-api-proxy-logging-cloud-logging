@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage continueOnError="false" enabled="true" name="AM-save-request">
+    <AssignVariable>
+        <Name>original_request_path</Name>
+        <Ref>request.path</Ref>
+    </AssignVariable>
+    <AssignVariable>
+        <Name>original_request_verb</Name>
+        <Ref>request.verb</Ref>
+    </AssignVariable>
+</AssignMessage>

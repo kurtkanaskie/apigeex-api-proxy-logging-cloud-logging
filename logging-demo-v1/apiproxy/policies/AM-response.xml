@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage continueOnError="false" enabled="true" name="AM-response">
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <Set>
+        <Payload contentType="application/json">
+{
+    "logging_level":"{logging_level}",
+    "region":"{system.region.name}",
+    "oas_request_flow":"{oas_request_flow}",
+    "total_latency":"{total_latency}",
+    "DC_latency":"{apigee.metrics.policy.DC-oas-flow.timeTaken}",
+    "ssn":"123-456-7890",
+    "ccn":"123-456-7890",
+    "phone":"866-555-1212",
+    "accountNumber":1234567890,
+    "request.path":"{request.path}",
+    "response.status.code":"{response.status.code}",
+    "backend_message": {response.content}
+}
+</Payload>
+        <StatusCode>200</StatusCode>
+        <ReasonPhrase>OK</ReasonPhrase>
+    </Set>
+    <AssignTo createNew="false" type="response"/>
+</AssignMessage>

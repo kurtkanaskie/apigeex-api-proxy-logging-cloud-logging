@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage continueOnError="false" enabled="true" name="AM-restore-request">
+    <AssignVariable>
+        <Name>request.path</Name>
+        <Ref>original_request_path</Ref>
+    </AssignVariable>
+    <AssignVariable>
+        <Name>request.verb</Name>
+        <Ref>original_request_verb</Ref>
+    </AssignVariable>
+</AssignMessage>

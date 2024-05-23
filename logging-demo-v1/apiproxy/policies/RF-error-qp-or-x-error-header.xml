@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<RaiseFault continueOnError="false" enabled="true" name="RF-error-qp-or-x-error-header">
+    <Properties/>
+    <FaultResponse>
+        <Set>
+            <Headers/>
+            <Payload contentType="application/json">
+{
+"message":"error {request.queryparam.error}{request.header.x-error}"
+}
+</Payload>
+            <StatusCode>{request.queryparam.error}{request.header.x-error}</StatusCode>
+            <ReasonPhrase>Bad Rquest</ReasonPhrase>
+        </Set>
+    </FaultResponse>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+</RaiseFault>
