@@ -212,5 +212,5 @@ This example is not an official Google product, nor is it part of an official Go
 
 ## TBD
 - add proxy README
-- Show KVM configuration and updates - in InitialValues in KV-log-config policy
+- Show KVM configuration and updates - in InitialValues in [KV-log-config](log-set-values-v1/sharedflowbundle/policies/KV-log-config.xml) policy
 - Automate with CI/CD.
